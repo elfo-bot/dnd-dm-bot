@@ -22,7 +22,6 @@ Powered by **DeepSeek**, **Supabase**, and **python-telegram-bot v20**.
 | AI | DeepSeek |
 | Database | Supabase |
 | Bot | python-telegram-bot v20 |
-| Hosting | Fly.io (optional) |
 
 ---
 
@@ -117,27 +116,6 @@ The schema creates 7 tables:
 python main.py
 ```
 
-### Deploy to Fly.io (Optional)
-```bash
-# Install flyctl
-brew install flyctl
-
-# Login
-fly auth login
-
-# Launch (without deploy first)
-fly launch --no-deploy
-
-# Set secrets
-fly secrets set TELEGRAM_BOT_TOKEN=x
-fly secrets set DEEPSEEK_API_KEY=x
-fly secrets set SUPABASE_URL=x
-fly secrets set SUPABASE_SERVICE_KEY=x
-
-# Deploy
-fly deploy
-```
-
 ---
 
 ## 📖 Bot Commands
@@ -166,8 +144,6 @@ dnd-dm-bot/
 ├── config.py            # Configuration
 ├── schema.sql           # Database schema
 ├── requirements.txt     # Python dependencies
-├── Dockerfile           # Docker config
-├── fly.toml             # Fly.io config
 ├── db/                  # Database layer
 │   ├── supabase_client.py
 │   ├── campaigns.py
@@ -183,6 +159,8 @@ dnd-dm-bot/
 │   ├── mechanics.py
 │   ├── initiative.py
 │   └── grid.py
+| Dockerfile           # Docker config (optional)
+├── fly.toml             # Fly.io config (optional)
 └── handlers/            # Telegram handlers
     ├── campaign.py
     ├── character.py
@@ -228,8 +206,7 @@ MIT License - Feel free to use and modify!
 - Verify URL and keys are correct
 
 **Deployment issues?**
-- Make sure `fly.toml` exists
-- Check all secrets are set
+- Check Python and dependencies are installed correctly
 
 ---
 
