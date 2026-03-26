@@ -67,13 +67,30 @@ SUPABASE_SERVICE_KEY=your_supabase_service_key
 
 ## 🔧 Getting Your API Keys
 
-### Telegram Bot Token
-1. Open Telegram → @BotFather
-2. Type `/newbot`
-3. Follow instructions to create bot
-4. Copy the token
+## 🔧 Getting Your API Keys
 
-### DeepSeek API Key
+### Step 1: Create Telegram Bot
+
+#### Using BotFather
+1. **Open Telegram** → Search for **@BotFather**
+2. **Start the bot** → Type `/start`
+3. **Create new bot** → Type `/newbot`
+4. **Choose a name** (e.g., "DnD Adventure Bot")
+5. **Choose a username** (must end with bot, e.g., `my_dnd_bot`)
+6. **Copy the token** - You'll get something like:
+   ```
+   1234567890:ABCdefGHIjklMNOpqrsTUVwxyz
+   ```
+
+#### Enable Bot Features
+1. In BotFather, type `/mybots`
+2. Select your bot
+3. Go to **Bot Settings** → **Menu Button** → **Configure Menu Button**
+4. Add a button that links to your bot (optional)
+
+---
+
+### Step 2: DeepSeek API Key
 1. Go to https://platform.deepseek.com/
 2. Sign up / Login
 3. Go to API Keys
@@ -177,7 +194,29 @@ dnd-dm-bot/
 3. **DeepSeek** - Ensure API key has credits
 4. **Telegram** - Bot must be started with /start first
 
+### 🔗 Connect Bot to the App
+
+After setting up your `.env` file:
+
+1. **Edit the .env file:**
+   ```env
+   TELEGRAM_BOT_TOKEN=your_bot_token_from_BotFather
+   ```
+
+2. **Run the bot:**
+   ```bash
+   python main.py
+   ```
+
+3. **Find your bot on Telegram:**
+   - Search for the username you created (e.g., @my_dnd_bot)
+   - Click **Start** or type `/start`
+
+4. **The bot is now connected!** 🎉
+
 ---
+
+## ⚠️ Important Notes
 
 ## 🤝 Credits
 
