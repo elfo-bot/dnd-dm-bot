@@ -1,0 +1,236 @@
+# 🎲 DnD AI DM Bot - 失落的芬德爾礦坑
+
+A Cantonese-language AI Dungeon Master Telegram bot for **Lost Mine of Phandelver** (DnD 5e).
+Powered by **DeepSeek**, **Supabase**, and **python-telegram-bot v20**.
+
+---
+
+## ✨ Features
+
+- 🤖 **AI Dungeon Master** - Full Cantonese DM narration via DeepSeek
+- 🗡️ **Combat System** - Emoji grid, initiative tracker, auto monster turns
+- 👤 **Character Creation** - Class, race, background, AI-generated stats
+- 💾 **Persistent Memory** - Campaign state saved in Supabase
+- 📖 **Complete LMOP** - All 6 locations, 15 NPCs, 12 monsters
+
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology |
+|-----------|------------|
+| AI | DeepSeek |
+| Database | Supabase |
+| Bot | python-telegram-bot v20 |
+| Hosting | Fly.io (optional) |
+
+---
+
+## 📋 Prerequisites
+
+- Python 3.10+
+- Telegram Account
+- DeepSeek API Key
+- Supabase Account
+
+---
+
+## 🚀 Quick Setup
+
+### 1. Clone the Project
+```bash
+git clone https://github.com/YOUR_USERNAME/dnd-dm-bot
+cd dnd-dm-bot
+```
+
+### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Create Environment File
+```bash
+# Create .env file with your credentials
+cp .env.example .env
+# OR manually create:
+touch .env
+```
+
+Edit `.env` with your credentials:
+```env
+TELEGRAM_BOT_TOKEN=your_telegram_bot_token
+DEEPSEEK_API_KEY=your_deepseek_api_key
+SUPABASE_URL=your_supabase_url
+SUPABASE_SERVICE_KEY=your_supabase_service_key
+```
+
+---
+
+## 🔧 Getting Your API Keys
+
+### Telegram Bot Token
+1. Open Telegram → @BotFather
+2. Type `/newbot`
+3. Follow instructions to create bot
+4. Copy the token
+
+### DeepSeek API Key
+1. Go to https://platform.deepseek.com/
+2. Sign up / Login
+3. Go to API Keys
+4. Create new key
+
+### Supabase Setup
+1. Go to https://supabase.com/
+2. Create new project
+3. Go to Settings → API
+4. Copy:
+   - Project URL
+   - service_role key (not anon key)
+
+---
+
+## 🗄️ Set Up Supabase Database
+
+### Option 1: SQL Editor (Recommended)
+1. Open your Supabase project
+2. Go to **SQL Editor**
+3. Copy and paste the contents of `schema.sql`
+4. Click **Run**
+
+### Option 2: Table-by-Table
+The schema creates 7 tables:
+- `campaigns` - Campaign state
+- `characters` - Player characters
+- `events` - Story events
+- `memory_summaries` - Session summaries
+- `world_state` - Decision flags
+- `combat_sessions` - Combat state
+- `combat_entities` - Combatants
+
+---
+
+## 🎮 Running the Bot
+
+### Local Development
+```bash
+python main.py
+```
+
+### Deploy to Fly.io (Optional)
+```bash
+# Install flyctl
+brew install flyctl
+
+# Login
+fly auth login
+
+# Launch (without deploy first)
+fly launch --no-deploy
+
+# Set secrets
+fly secrets set TELEGRAM_BOT_TOKEN=x
+fly secrets set DEEPSEEK_API_KEY=x
+fly secrets set SUPABASE_URL=x
+fly secrets set SUPABASE_SERVICE_KEY=x
+
+# Deploy
+fly deploy
+```
+
+---
+
+## 📖 Bot Commands
+
+| Command | Description |
+|---------|-------------|
+| `/newgame` | Start a new campaign |
+| `/newchar` | Create your character |
+| `/startadventure` | Begin the adventure |
+| `/status` | View character sheets |
+| `/recap` | AI session summary |
+| `/roll 2d6` | Roll dice |
+| `/startcombat goblin 3` | Start combat (3 goblins) |
+| `/attack goblin1 18 7` | Attack (roll=18, damage=7) |
+| `/combatgrid` | Show emoji battle grid |
+| `/nextturn` | Next combat turn |
+| `/endcombat` | End combat |
+
+---
+
+## 📁 Project Structure
+
+```
+dnd-dm-bot/
+├── main.py              # Bot entry point
+├── config.py            # Configuration
+├── schema.sql           # Database schema
+├── requirements.txt     # Python dependencies
+├── Dockerfile           # Docker config
+├── fly.toml             # Fly.io config
+├── db/                  # Database layer
+│   ├── supabase_client.py
+│   ├── campaigns.py
+│   ├── characters.py
+│   ├── events.py
+│   └── combat.py
+├── dm/                  # AI DM layer
+│   ├── deepseek_client.py
+│   ├── context_builder.py
+│   ├── memory_manager.py
+│   └── module_lmop.py
+├── combat/              # Combat system
+│   ├── mechanics.py
+│   ├── initiative.py
+│   └── grid.py
+└── handlers/            # Telegram handlers
+    ├── campaign.py
+    ├── character.py
+    ├── combat_handlers.py
+    └── general.py
+```
+
+---
+
+## ⚠️ Important Notes
+
+1. **.env file** - Keep this secret! Never commit to GitHub
+2. **Supabase** - Make sure tables are created before running
+3. **DeepSeek** - Ensure API key has credits
+4. **Telegram** - Bot must be started with /start first
+
+---
+
+## 🤝 Credits
+
+- **DM AI** - Powered by DeepSeek
+- **Database** - Supabase
+- **Bot Framework** - python-telegram-bot
+- **Adventure Module** - Lost Mine of Phandelver (DnD 5e)
+
+---
+
+## 📜 License
+
+MIT License - Feel free to use and modify!
+
+---
+
+## ❓ Troubleshooting
+
+**Bot not responding?**
+- Check `.env` credentials are correct
+- Verify Supabase tables exist
+- Check DeepSeek API has credits
+
+**Database errors?**
+- Run `schema.sql` in Supabase SQL Editor
+- Verify URL and keys are correct
+
+**Deployment issues?**
+- Make sure `fly.toml` exists
+- Check all secrets are set
+
+---
+
+*Created for Cantonese-speaking DnD players!* 🎲🧝
